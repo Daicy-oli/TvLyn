@@ -357,7 +357,7 @@ function displayChannelMenu() {
     cloudIcon.name = 'cloud-outline';
 
     const apexSpan = document.createElement('span');
-    apexSpan.textContent = 'TV Gratis';
+    apexSpan.textContent = 'LYN PELIS';
 
     divNombrePagina.appendChild(cloudIcon);
     divNombrePagina.appendChild(apexSpan);
@@ -471,7 +471,7 @@ function displayChannelMenu() {
     divUsuario.className = 'usuario';
 
     const usuarioImg = document.createElement('img');
-    usuarioImg.src = 'https://imgur.com/mC4EzF9.png';
+    usuarioImg.src = 'https://imgur.com/nW3B7nL.png';
     usuarioImg.alt = '';
 
     const usuarioLink = document.createElement('a');
