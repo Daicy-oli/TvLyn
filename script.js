@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Actualiza la lista de canales cada 30 segundos
     fetchAndUpdateChannels();
-    setInterval(fetchAndUpdateChannels, 30000);
+    
 
     // Ocultar inicialmente los contenedores de video y iframe
     document.getElementById('player-container').style.display = 'none';
@@ -104,19 +104,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Función para cerrar el iframe en pantalla completa
-    document.getElementById('close-iframefull').addEventListener('click', () => {
-        isManualExitFullscreen = true;
-        const iframeContainer = document.getElementById('iframe-container');
-        iframeContainer.style.display = 'none';
+    // Función para salir del modo pantalla completa sin cerrar el iframe
+document.getElementById('close-iframefull').addEventListener('click', () => {
+    isManualExitFullscreen = true;
+    
+    // Verifica si está en pantalla completa y sale del modo pantalla completa
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
 
-        const iframe = document.getElementById('videoFrame');
-        iframe.src = ''; // Eliminar el contenido del iframe para detener el sonido
+});
 
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        }
-    });
 
     // Añadir eventos de redimensionamiento y cambio de pantalla completa
     window.addEventListener('resize', handleResize);
@@ -667,7 +665,6 @@ function displayCategoryItems(channelId, tvgId) {
 }
 
 
-
 // Función para actualizar el reproductor con una nueva URL
 function updatePlayer(url) {
     document.getElementById('player-container').style.display = 'flex';
@@ -680,56 +677,12 @@ function updatePlayer(url) {
     });
 }
 
-
-
 // Función para actualizar el iframe con una nueva URL
 function updateIframe(url, normal = false) {
     const iframe = document.getElementById('videoFrame');
     iframe.src = url;
     document.getElementById('iframe-container').style.display = 'flex';
 
-    if (!normal) {
-        // Agregar función para eliminar anuncios del iframe
-        iframe.onload = function() {
-            const iframeWindow = iframe.contentWindow;
-
-            function removeAds() {
-                try {
-                    // Ejemplo de eliminación de anuncios específicos
-                    const ads = iframeWindow.document.querySelectorAll('.ad, .advertisement, .adsbygoogle, [id^="google_ads"], [class^="ad-"]');
-                    ads.forEach(ad => ad.remove());
-
-                    // Remover elementos de script que puedan cargar anuncios
-                    const scripts = iframeWindow.document.querySelectorAll('script');
-                    scripts.forEach(script => {
-                        if (script.src.includes('ad') || script.src.includes('ads')) {
-                            script.remove();
-                        }
-                    });
-
-                    // Remover iframes de publicidad
-                    const adIframes = iframeWindow.document.querySelectorAll('iframe');
-                    adIframes.forEach(adIframe => {
-                        if (adIframe.src.includes('ad') || adIframe.src.includes('ads')) {
-                            adIframe.remove();
-                        }
-                    });
-
-                    // Remover pop-ups y overlays de anuncios
-                    const popups = iframeWindow.document.querySelectorAll('.popup, .overlay');
-                    popups.forEach(popup => popup.remove());
-                } catch (error) {
-                    console.error('Error removing ads:', error);
-                }
-            }
-
-            removeAds();
-
-            // Ejemplo de ejecución periódica para remover anuncios que aparezcan dinámicamente
-            const removeAdsInterval = setInterval(removeAds, 2000);
-
-            // Detener la ejecución periódica después de un tiempo
-            setTimeout(() => clearInterval(removeAdsInterval), 30000);
-        };
-    }
+    // Aquí se ha eliminado la lógica para bloquear anuncios
 }
+
