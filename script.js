@@ -210,7 +210,7 @@ document.getElementById('close-iframefull').addEventListener('click', () => {
 
 
 // URL del archivo M3U en GitHub
-const githubUrl = 'https://raw.githubusercontent.com/Tequiroconmigo/portal/main/deporte.m3u';
+const githubUrl = 'https://raw.githubusercontent.com/Daicy-oli/TvLyn/main/Eilyn.m3u';
 
 // Función para obtener y actualizar las categorías de canales
 function fetchAndUpdateChannels() {
